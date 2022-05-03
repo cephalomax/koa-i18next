@@ -128,6 +128,7 @@ function isDetectPath(order = []) {
 function setLanguage(context, lng, options = {}) {
   const {
     lookupCookie
+    , lookupCookieDomain
     , lookupPath
     , lookupSession
   } = options
@@ -136,7 +137,7 @@ function setLanguage(context, lng, options = {}) {
   context.language = context.lng = lng
   context.set('content-language', lng)
   if (lookupCookie) {
-    context.cookies.set(lookupCookie, lng, { httpOnly: false, signed: false });
+    context.cookies.set(lookupCookie, lng, { httpOnly: false, signed: false, domain: lookupCookieDomain });
   }
   if (lookupSession && context.session) {
     context.session[lookupSession] = lng
